@@ -124,6 +124,7 @@ To save this script as your post-commit git hook, run
     parser.add_argument('--username', type=str, help="Github username. Can be inferred.")
     parser.add_argument('--project', type=str, help="Github project. Can be inferred.")
     parser.add_argument('--nocdn', action='store_true', help="Use local relative path rather than rawgit's CDN. Useful for debugging.")
+    parser.add_argument('--wikipage', action='store_true', help="Store under Github Wiki pages")
     parser.add_argument('--htmlize', action='store_true', help="Output a md.html file for you to preview. Useful for debugging.")
     parser.add_argument('--valign', action='store_true', help="Use the valign attribute instead of the align=middle trick. Only works on Chrome.")
     parser.add_argument('--rerender', action='store_true', help="Even if equations have already been compiled, recompile them anyways.")
@@ -155,6 +156,7 @@ To save this script as your post-commit git hook, run
             args.username,
             args.project,
             args.nocdn,
+            args.wikipage,
             args.htmlize,
             args.valign,
             args.rerender,

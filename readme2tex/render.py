@@ -123,6 +123,7 @@ def render(
         user=None,
         project=None,
         nocdn=False,
+        wikipage=False,
         htmlize=False,
         use_valign=False,
         rerender=False,
@@ -308,8 +309,10 @@ def render(
 
     if nocdn:
         svg_url = "{svgdir}/{name}.svg"
+    elif wikipage:
+        svg_url = "https://raw.githubusercontent.com/wiki/{user}/{project}/{svgdir}/{name}.svg"
     else:
-        svg_url = "https://rawgit.com/{user}/{project}/{branch}/{svgdir}/{name}.svg"
+       svg_url = "https://rawgit.com/{user}/{project}/{branch}/{svgdir}/{name}.svg"
 
     if pngtrick:
         svg_url = svg_url[:-4] + '.png'
@@ -333,6 +336,7 @@ def render(
             tail.append('%x' % random.randint(0, 1e12))
         if needs_inversion:
             tail.append('invert_in_darkmode')
+        tail.append('sanitize=true')
         img = '<img alt=%s src="%s%s" %s width="%spt" height="%spt"/>' % (
             quoteattr(equation),
             url,
