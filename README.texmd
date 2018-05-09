@@ -41,21 +41,19 @@ are properly aligned with the rest of the text to give a more natural look to th
 this formula $\frac{dy}{dx}$ is preprocessed so that it lines up at the correct baseline for the text.
 This is the one salient feature of this package compared to the others out there.
 
+### Dependencies
+
+* [Python 2.7](https://www.python.org/) -- The sourcecode for readme2tex is written in Python, so Python is required to compile readme2tex from source.
+* [LaTeX](https://www.latex-project.org/) -- A language for writing Mathematical equations. [MiKTEX](https://miktex.org/) is the prefered Latex software for Windows. 
+    * Ensure `latex` and `dvisvgm` on your `PATH`. 
+    * Pre-install the `geometry` package in $\text{\LaTeX}$.
+* [Microsoft Visual C++ 9.0](http://aka.ms/vcpython27) is required to compile readme2tex from source.
+    
 ### Installation
-
-Make sure that you have Python 2.7 or above and `pip` installed. In addition, you'll need to have the programs `latex` 
-and `dvisvgm` on your `PATH`. In addition, you'll need to pre-install the `geometry` package in $\text{\LaTeX}$.
-
 To install `readme2tex`, you'll need to run
 
 ```bash
-sudo pip install readme2tex
-```
-
-or, if you want to try out the bleeding edge,
-
-```bash
-git clone https://github.com/leegao/readme2tex
+git clone https://github.com/NEU-ABLE-LAB/readme2tex.git
 cd readme2tex
 python setup.py develop
 ```
