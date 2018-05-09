@@ -1,3 +1,5 @@
+<p align="center"><img alt="$$\text{test22}$$" src="svgs/f6a9edb31194550c3c3bcf963da24167.svg?invert_in_darkmode&sanitize=true" align=middle width="43.01384175pt" height="10.5936072pt"/></p>
+
 # readme2tex
 Renders LaTeX for Github Readmes
 
