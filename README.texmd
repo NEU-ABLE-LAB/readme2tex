@@ -46,7 +46,11 @@ This is the one salient feature of this package compared to the others out there
 * [Python 2.7](https://www.python.org/) -- The sourcecode for readme2tex is written in Python, so Python is required to compile readme2tex from source.
 * [LaTeX](https://www.latex-project.org/) -- A language for writing Mathematical equations. [MiKTEX](https://miktex.org/) is the prefered Latex software for Windows. 
     * Ensure `latex` and `dvisvgm` on your `PATH`. 
-    * Pre-install the `geometry` package in $\text{\LaTeX}$.
+    * Pre-install the following packages in $\text{\LaTeX}$.
+        * `geometry`
+        * `tkiz`
+        * `ms`
+        * `xclolor`
 * [Microsoft Visual C++ 9.0](http://aka.ms/vcpython27) is required to compile readme2tex from source.
     
 ### Installation
@@ -384,11 +388,7 @@ mode. For most inline formulas, this is usually a non-issue.
 #### How to compile this document
 Make sure that you have the `tikz` and the `xcolor` packages installed locally.
 
-    python -m readme2tex --usepackage "tikz" --usepackage "xcolor" --output README.md --branch svgs
-
-and of course
-
-    python -m readme2tex --usepackage "tikz" --usepackage "xcolor" --output README.md --branch svgs --add-git-hook
+    python -m readme2tex --usepackage "tikz" --usepackage "xcolor" --output README.md --nocdn
 
 For the `png` relative mode, use
 
