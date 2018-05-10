@@ -1,8 +1,18 @@
+#!/bin/bash
+# This script is to be used with the post-commit hooks
+# in the comment below to run readme2tex on every file 
+# in the working directory (recursively) with the extension
+# .texmd to convert any LaTeX in the file into PNGs (placed
+# in the svgs/ directory), turning the .texmd files into a 
+# .md file used by GitHub. Works with private repos and wikis
+#
+# Copy the post-commit file to the .git/hooks/ directory.
+
 bold=$(tput bold)
 color=$(tput setaf 2)
 reset=$(tput sgr0)
  
-# Remove "./" from beginning of string
+# Remove "./" from beginning of string produced by find
 texmd_fname=$(echo $1 | sed 's/^\.\///')
 
 
@@ -41,7 +51,7 @@ fi
 
 read -p "[readme2tex] ${color}$texmd_fname$reset has changed; would you like to update ${color}$md_fname$reset as well? This will run
 
-  > python -m readme2tex --output ${color}$md_fname$reset --readme ${color}$texmd_fname$reset --nocdn --usepackage 'tikz' --usepackage 'xcolor'
+  > python -m readme2tex --output ${color}$md_fname$reset --readme ${color}$texmd_fname$reset --nocdn --pngtrick --usepackage 'tikz' --usepackage 'xcolor'
 
 Would you like to run this now? [Y/n]: " meh
 
@@ -58,7 +68,7 @@ esac
 tput setaf 3
 echo
 echo "Running readme2tex..."
-python -m readme2tex --output $md_fname --readme $texmd_fname --nocdn --usepackage 'tikz' --usepackage 'xcolor'
+python -m readme2tex --output $md_fname --readme $texmd_fname --nocdn --pngtrick --usepackage 'tikz' --usepackage 'xcolor'
 echo "Completed readme2tex"
 result=$?
 echo $reset
@@ -66,6 +76,7 @@ echo $reset
 if [ $result -eq 0 ]; then
     echo "Finished rendering."
     git add $md_fname
+    git add svgs/*
 
 else
     echo "$(tput setaf 1)Encountered error while translating $texmd_fname${reset}"
