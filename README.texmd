@@ -1,5 +1,3 @@
-$$\text{test22}$$
-
 # readme2tex
 Renders LaTeX for Github Readmes
 
@@ -46,6 +44,12 @@ This is the one salient feature of this package compared to the others out there
 ### Dependencies
 
 * [Python 2.7](https://www.python.org/) -- The sourcecode for readme2tex is written in Python, so Python is required to compile readme2tex from source.
+    * Install the following packages with python packages`pip install [PACKAGE NAME]`
+    
+        * `pip install [cairosvg](https://cairosvg.org/)` -- Required to convert SVG impages to PNG. CairoSVG requires the [pycairo graphics pacakage](https://www.cairographics.org/pycairo/). Follow [these instructions](https://www.cairographics.org/download/) to install. 
+        
+        **On Windows:** The Cairo project does not provide pre-compiled binaries for Windows, but Christoph Gohlke maintains a site containing unofficial Windows binaries for several Python extension packages, including Cairo itself. Therefore, the easiest way to install Cairo on Windows along with its Python bindings is simply to download it from [Christoph’s site](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pycairo). Make sure you use an installer that is suitable for your Windows platform (32-bit or 64-bit) and the version of Python you are using.
+        
 * [LaTeX](https://www.latex-project.org/) -- A language for writing Mathematical equations. [MiKTEX](https://miktex.org/) is the prefered Latex software for Windows. 
     * Ensure `latex` and `dvisvgm` on your `PATH`. 
     * Pre-install the following packages in $\text{\LaTeX}$.
@@ -70,34 +74,13 @@ To compile `INPUT.md` and render all of its formulas, run
 python -m readme2tex --output README.md INPUT.md
 ```
 
-If you want to do this automatically for every commit of INPUT.md, you can use the `--add-git-hook` command once to
-set up the post-commit hook, like so
-
-```bash
-git stash --include-untracked
-git branch svgs # if this isn't already there
-
-python -m readme2tex --output README.md --branch svgs --usepackage tikz INPUT.md --add-git-hook
-
-# modify INPUT.md
-
-git add INPUT.md
-git commit -a -m "updated readme"
-
-git stash pop
-```
-
-and every `git commit` that touches `INPUT.md` from now on will allow you to automatically run `readme2tex` on it, saving
-you from having to remember how `readme2tex` works. The caveat is that if you use a GUI to interact with git, things
-might get a bit wonky. In particular, `readme2tex` will just assume that you're fine with all of the changes and won't
-prompt you for verification like it does on the terminal.
+If you want to do this automatically for every commit of INPUT.md, you can add the git post-commit hook found and instructions in the `hooks/` directory. Every `git commit` that touches `*.texmd` from now on will allow you to automatically run `readme2tex` on it, saving you from having to remember how `readme2tex` works. The caveat is that if you use a GUI to interact with git, things might get a bit wonky. In particular, `readme2tex` will just assume that you're fine with all of the changes and won't prompt you for verification like it does on the terminal.
 
 <p align="center">
 <a href="https://asciinema.org/a/2am62r2x2udg1zqyb6r3kpm1i"><img src="https://asciinema.org/a/2am62r2x2udg1zqyb6r3kpm1i.png" width=600/></a>
 </p>
 
-You can uninstall the hook by deleting `.git/hooks/post-commit`. See `python -m readme2tex --help` for a list
-of what you can do in `readme2tex`.
+See `python -m readme2tex --help` for a list of what you can do in `readme2tex`.
 
 ### Examples:
 
@@ -426,3 +409,8 @@ For the `png` relative mode, use
     \end{scope}
   }	
 \end{tikzpicture}
+
+# TODO
+[] Re-implement `--add-git-hook`
+[] Confirm that the texmd2md git hook works recursively
+[] Robustly test texmd2md git hook
